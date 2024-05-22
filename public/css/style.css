@@ -15,8 +15,11 @@ body {
     background: #2a2a2a;
     border-radius: 10px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-    width: 400px;
+    width: 90%; /* Adjusted width for responsiveness */
+    max-width: 400px; /* Maximum width */
+    margin: 0 auto; /* Center the container horizontally */
 }
+
 
 header h1 {
     font-size: 24px;
@@ -37,8 +40,8 @@ header p {
 }
 
 textarea {
-    width: 90%;
-    height: 30%;
+    width: 95%; /* Adjusted width for responsiveness */
+    height: 20px; /* Adjusted height for responsiveness */
     padding: 10px;
     border-radius: 4px;
     border: none;
@@ -81,6 +84,7 @@ footer .explore-tools {
 footer .explore-tools:hover {
     background: #555;
 }
+
 .blue-heart {
     color: blue;
 }
@@ -92,4 +96,11 @@ footer .explore-tools:hover {
 
 .spin-animation {
     animation: spin 1s linear infinite;
+}
+
+/* Add margin to each side of the container */
+@media (max-width: 768px) {
+    .container {
+        margin: 0 10px; /* Adjust margin as needed */
+    }
 }
