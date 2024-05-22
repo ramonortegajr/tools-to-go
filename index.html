@@ -3,21 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./public/css/style.css">
-    <title>YT-MP4 | Converter</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Tube To Go</title>
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>YTMP4</small></h1> 
-            <p style="font-size: 70%;">See how easy it is to generate youtube link to mp4 videos with just a few clicks.</p>
+            <h1><b>Tube To GO</b></h1>
+            <p style="font-size: 80%;">Tube To Go: Dahil sa MP4, YouTube Mo, Madaling Kopyahin!</p>
         </header>
         <div class="converter-box">
             <form id="converter-form">
-                <textarea id="video-script" placeholder="Paste link here" required></textarea>
+                <textarea id="video-url" placeholder="Paste link here" required></textarea>
                 <p class="tip">💡 Tip: Use short, punctuated sentences.</p>
-                <button type="submit">Generate Video</button>
+                <button id="generate-button" type="submit" style="background-color: #3e5c7b; color: white;">
+                    <i id="cog-icon" class="fas fa-cog"></i> Generate Video
+                </button>
             </form>
+            <div id="video-info" style="display: none;">
+                <img id="thumbnail" src="" alt="Video Thumbnail">
+                <p id="title"></p>
+                <p id="length"></p>
+                <label for="quality">Choose quality:</label>
+                <select id="quality">
+                    <option value="1080p">1080p</option>
+                    <option value="360p">360p</option>
+                </select>
+                <button id="download-button" style="background-color: #3e5c7b; color: white;">Download</button>
+            </div>
             <p class="note">Generate for free. No signup needed</p>
         </div>
         <footer>
@@ -25,6 +39,6 @@
         </footer>
         <p style="font-size: 80%;">Developed with <span class="blue-heart">&#x1F499;</span> by Ram Ortega</p>
     </div>
-    <script src="./public/js/script.js"></script>
+    <script src="./js/script.js"></script>
 </body>
 </html>

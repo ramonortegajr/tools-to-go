@@ -44,7 +44,6 @@ textarea {
     border: none;
     resize: none;
     margin-bottom: 10px;
-
 }
 
 .tip {
@@ -54,17 +53,12 @@ textarea {
 }
 
 button[type="submit"] {
-    background: linear-gradient(to right, #38ef7d, #11998e);
     color: #fff;
     border: none;
     padding: 10px 20px;
     border-radius: 4px;
     cursor: pointer;
     font-size: 16px;
-}
-
-button[type="submit"]:hover {
-    background: linear-gradient(to right, #11998e, #38ef7d);
 }
 
 .note {
@@ -89,4 +83,13 @@ footer .explore-tools:hover {
 }
 .blue-heart {
     color: blue;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.spin-animation {
+    animation: spin 1s linear infinite;
 }
