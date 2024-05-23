@@ -4,70 +4,133 @@ body {
     background-color: #1a1a1a;
     color: #fff;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    height: 100vh;
 }
 
-.container {
-    text-align: center;
-    padding: 20px;
-    background: #2a2a2a;
-    border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-    width: 90%; /* Adjusted width for responsiveness */
-    max-width: 400px; /* Maximum width */
-    margin: 0 auto; /* Center the container horizontally */
+.navbar {
+    width: 100%;
+    background-color: #333;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
 }
 
+.navbar-left, .navbar-center, .navbar-right {
+    display: flex;
+    align-items: center;
+}
 
-header h1 {
+.menu-icon, .home-icon, .icon {
+    background: none;
+    border: none;
+    color: #fff;
     font-size: 24px;
-    margin-bottom: 10px;
+    cursor: pointer;
+    margin-right: 15px;
 }
 
-header p {
-    font-size: 14px;
-    margin-bottom: 20px;
-    color: #bbbbbb;
+.icon {
+    font-family: FontAwesome;
+}
+
+.navbar-center input[type="text"] {
+    background-color: #444;
+    border: none;
+    border-radius: 4px;
+    padding: 5px 10px;
+    color: #fff;
+    margin-right: 15px;
+    flex-grow: 1;
+}
+
+.navbar-right select, .coffee-button {
+    background-color: #444;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    padding: 5px 10px;
+    margin-right: 15px;
+    cursor: pointer;
+}
+
+.coffee-button {
+    background-color: #28a745;
+}
+
+header {
+    text-align: center;
+    padding: 80px 20px 20px; /* Adjusted padding to account for fixed navbar */
+    margin-top: 60px; /* Space below the fixed navbar */
+    width: 100%;
+    max-width: 1000px;
+}
+
+header img {
+    width: 150px; /* Adjust as needed */
+    display: block;
+    margin: 0 auto;
 }
 
 .converter-box {
     background: #333;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    padding: 25px;
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.19); /* 3D effect */
+    margin: 20px;
+    width: 90%;
+    max-width: 600px;
+    text-align: center; /* Center text and buttons */
 }
 
 textarea {
-    width: 95%; /* Adjusted width for responsiveness */
-    height: 20px; /* Adjusted height for responsiveness */
+    width: 96%; /* Adjusted width for responsiveness */
+    height: 20px; /* Adjusted height for better user experience */
     padding: 10px;
     border-radius: 4px;
     border: none;
     resize: none;
     margin-bottom: 10px;
-}
-
-.tip {
-    font-size: 12px;
-    color: #aaaaaa;
-    margin-bottom: 10px;
+    background-color: #ffffff;
+    color: #fff;
 }
 
 button[type="submit"] {
-    color: #fff;
+    background-color: #3e5c7b;
+    color: white;
     border: none;
     padding: 10px 20px;
     border-radius: 4px;
     cursor: pointer;
     font-size: 16px;
+    display: inline-block;
+    margin: 10px auto; /* Center button */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s;
+}
+
+button[type="submit"]:hover {
+    transform: scale(1.05); /* Slightly enlarge on hover for 3D effect */
+}
+
+button[type="submit"] i {
+    margin-right: 5px;
 }
 
 .note {
     font-size: 12px;
     color: #bbbbbb;
     margin-top: 10px;
+}
+
+footer {
+    margin-top: 20px;
 }
 
 footer .explore-tools {
@@ -98,9 +161,59 @@ footer .explore-tools:hover {
     animation: spin 1s linear infinite;
 }
 
-/* Add margin to each side of the container */
+/* Media query for smaller screens */
 @media (max-width: 768px) {
-    .container {
-        margin: 0 10px; /* Adjust margin as needed */
+    .navbar-center input[type="text"] {
+        flex-grow: 1;
+        margin-right: 0;
+    }
+
+    .navbar-right {
+        display: none;
+    }
+
+    header img {
+        width: 100px; /* Smaller logo for smaller screens */
+    }
+
+    .converter-box {
+        padding: 15px;
+    }
+
+    .note, .footer .explore-tools {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .menu-icon, .home-icon, .icon {
+        font-size: 20px;
+        margin-right: 10px;
+    }
+
+    .navbar-center input[type="text"] {
+        font-size: 14px;
+    }
+
+    .navbar-right select, .coffee-button {
+        padding: 5px;
+        margin-right: 10px;
+    }
+
+    .coffee-button {
+        font-size: 14px;
+        padding: 5px 10px;
+    }
+
+    header img {
+        width: 80px; /* Smaller logo for smaller screens */
+    }
+
+    header p {
+        font-size: 70%; /* Smaller text for smaller screens */
+    }
+
+    .note, .footer .explore-tools {
+        font-size: 12px;
     }
 }

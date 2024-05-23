@@ -8,36 +8,46 @@
     <title>Tube To Go</title>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1><b>Tube To GO</b></h1>
-            <p style="font-size: 80%;">Tube To Go: Dahil sa MP4, YouTube Mo, Madaling Kopyahin!</p>
-        </header>
-        <div class="converter-box">
-            <form id="converter-form">
-                <textarea id="video-url" placeholder="Paste link here" required></textarea>
-                <button id="generate-button" type="submit" style="background-color: #3e5c7b; color: white;">
-                    <i id="cog-icon" class="fas fa-cog"></i> Generate Video
-                </button>
-            </form>
-            <div id="video-info" style="display: none;">
-                <img id="thumbnail" src="" alt="Video Thumbnail">
-                <p id="title"></p>
-                <p id="length"></p>
-                <label for="quality">Choose quality:</label>
-                <select id="quality">
-                    <option value="1080p">1080p</option>
-                    <option value="360p">360p</option>
-                </select>
-                <button id="download-button" style="background-color: #3e5c7b; color: white;">Download</button>
-            </div>
-            <p class="note">💡Generate for free. No signup needed</p>
+    <nav class="navbar">
+        <div class="navbar-left">
+            <button class="menu-icon">&#9776;</button>
+            <button class="home-icon">&#8962;</button>
         </div>
-        <footer>
-            <button class="explore-tools">More tools soon ➔</button>
-        </footer>
-        <p style="font-size: 80%;">Developed with <span class="blue-heart">&#x1F499;</span> by Ram Ortega</p>
+        <div class="navbar-right">
+            <button class="icon github-icon">&#xf09b;</button>
+            <button class="icon twitter-icon">&#xf099;</button>
+            <button class="icon info-icon">&#xf129;</button>
+            <button class="icon theme-icon">&#xf185;</button>
+        </div>
+    </nav>
+    <header>
+        <h1>Tube To GO!</h1>
+        <p style="font-size: 80%;">Tube To Go: Dahil sa MP4, YouTube Mo, Madaling Kopyahin!</p>
+    </header>
+    <div class="converter-box">
+        <form id="converter-form">
+            <textarea id="video-url" placeholder="Paste link here" required></textarea>
+            <button id="generate-button" type="submit" style="background-color: #3e5c7b; color: white;">
+                <i id="cog-icon" class="fas fa-cog"></i> Generate Video
+            </button>
+        </form>
+        <div id="video-info" style="display: none;">
+            <img id="thumbnail" src="" alt="Video Thumbnail">
+            <p id="title"></p>
+            <p id="length"></p>
+            <label for="quality">Choose quality:</label>
+            <select id="quality">
+                <option value="1080p">1080p</option>
+                <option value="360p">360p</option>
+            </select>
+            <button id="download-button" style="background-color: #3e5c7b; color: white;">Download</button>
+        </div>
+        <p class="note">💡Generate for free. No signup needed</p>
     </div>
+    <footer>
+        <button class="explore-tools">More tools soon ➔</button>
+    </footer>
+    <p style="font-size: 80%;">Developed with <span class="blue-heart">&#x1F499;</span> by Ram Ortega</p>
     <script src="./js/script.js"></script>
 </body>
 </html>
