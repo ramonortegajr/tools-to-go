@@ -98,7 +98,7 @@ textarea {
     resize: none;
     margin-bottom: 10px;
     background-color: #ffffff;
-    color: #fff;
+    color: #000000;
 }
 
 button[type="submit"] {
@@ -130,7 +130,7 @@ button[type="submit"] i {
 }
 
 footer {
-    margin-top: 20px;
+    margin-top: 1px;
 }
 
 footer .explore-tools {
@@ -141,7 +141,7 @@ footer .explore-tools {
     border-radius: 4px;
     cursor: pointer;
     font-size: 16px;
-    margin-top: 20px;
+    margin-top: 1px;
 }
 
 footer .explore-tools:hover {
@@ -185,7 +185,7 @@ footer .explore-tools:hover {
     }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 400px) {
     .menu-icon, .home-icon, .icon {
         font-size: 20px;
         margin-right: 10px;
