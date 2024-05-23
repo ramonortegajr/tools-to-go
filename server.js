@@ -1,7 +1,8 @@
 const express = require('express');
-const ytdl = require('ytdl-core');
 const cors = require('cors');
 const path = require('path');
+const fs = require('fs');
+const ytdl = require('ytdl-core-discord');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -13,7 +14,7 @@ app.set('view engine', 'ejs');
 
 app.get('/', (req, res) => {
     res.render('index.ejs');
-})
+});
 
 app.post('/get-video-info', async (req, res) => {
     const videoUrl = req.body.url;
@@ -35,17 +36,29 @@ app.post('/get-video-info', async (req, res) => {
     }
 });
 
-app.get('/download', (req, res) => {
+app.get('/download', async (req, res) => {
     const videoUrl = req.query.url;
-    const quality = req.query.quality;
+    const quality = req.query.quality || 'lowest';
 
     if (!ytdl.validateURL(videoUrl)) {
         return res.status(400).json({ error: 'Invalid URL' });
     }
 
-    const format = quality === '1080p' ? 'highestvideo' : 'lowestvideo';
-    res.header('Content-Disposition', `attachment; filename="video.mp4"`);
-    ytdl(videoUrl, { filter: format }).pipe(res);
+    try {
+        const info = await ytdl.getInfo(videoUrl);
+        const title = info.videoDetails.title;
+        const stream = ytdl(videoUrl, { quality: 'highestaudio' });
+
+        res.header('Content-Disposition', `attachment; filename="${title}.mp4"`);
+        await stream.pipe(fs.createWriteStream(`${title}.mp4`));
+
+        stream.on('end', () => {
+            res.status(200).send('Video downloaded successfully');
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Failed to download video' });
+    }
 });
 
 app.listen(PORT, () => {

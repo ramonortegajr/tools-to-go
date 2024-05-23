@@ -178,12 +178,25 @@ footer .explore-tools:hover {
 
     .converter-box {
         padding: 15px;
+        margin: 15px; /* Add margin to the sides */
     }
 
     .note, .footer .explore-tools {
         font-size: 14px;
     }
 }
+
+@media (max-width: 400px) {
+    .converter-box {
+        margin: 15px; /* Add margin to the sides */
+        padding: 10px;
+    }
+
+    .note, .footer .explore-tools {
+        font-size: 12px;
+    }
+}
+
 
 @media (max-width: 400px) {
     .menu-icon, .home-icon, .icon {
