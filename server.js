@@ -9,10 +9,11 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 app.use(express.static('public'));
+app.set('view engine', 'ejs');
 
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
-});
+    res.render('index.ejs');
+})
 
 app.post('/get-video-info', async (req, res) => {
     const videoUrl = req.body.url;
