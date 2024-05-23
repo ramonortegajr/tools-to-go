@@ -244,3 +244,23 @@ footer .explore-tools:hover {
         font-size: 12px;
     }
 }
+/* Add this CSS to your existing style.css file */
+#download-button {
+    background-color: #038b6c;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#download-button:hover {
+    transform: scale(1.05); /* Slightly enlarge on hover for 3D effect */
+}
+
+#download-button.clicked {
+    transform: scale(1.95); /* Slight scale effect on click */
+    transition: transform 0.1s ease; /* Add a transition for the click effect */
+}

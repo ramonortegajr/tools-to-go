@@ -23,12 +23,12 @@
     </header>
     <div class="converter-box">
         <form id="converter-form">
-            <div class="input-container">
+            <div class="input-container" id="input-container">
                 <textarea id="video-url" placeholder="Paste link here" required></textarea>
+                <button id="generate-button" type="submit" style="background-color: #3e5c7b; color: white;">
+                    <i id="cog-icon" class="fas fa-cog"></i> Generate Link
+                </button>
             </div>
-            <button id="generate-button" type="submit" style="background-color: #3e5c7b; color: white;">
-                <i id="cog-icon" class="fas fa-cog"></i> Generate Link
-            </button>
         </form>
         <div id="video-info" style="display: none;">
             <img id="thumbnail" src="" alt="Video Thumbnail">
