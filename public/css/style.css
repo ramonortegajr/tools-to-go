@@ -115,12 +115,26 @@ button[type="submit"] {
     transition: transform 0.2s;
 }
 
+
 button[type="submit"]:hover {
     transform: scale(1.05); /* Slightly enlarge on hover for 3D effect */
 }
 
 button[type="submit"] i {
     margin-right: 5px;
+}
+button #download-button {
+    background-color: #3e5c7b;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    display: inline-block;
+    margin: 10px auto; /* Center button */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s;
 }
 
 .note {

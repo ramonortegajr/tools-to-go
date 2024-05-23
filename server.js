@@ -2,15 +2,30 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path');
 const fs = require('fs');
-const ytdl = require('ytdl-core-discord');
+const ytdl = require('ytdl-core');
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 2000;
+const DOWNLOAD_DIR = path.join(__dirname, 'downloads'); // Folder to save downloaded videos
 
 app.use(cors());
 app.use(express.json());
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
+
+// Create downloads folder if it doesn't exist
+if (!fs.existsSync(DOWNLOAD_DIR)) {
+    fs.mkdirSync(DOWNLOAD_DIR);
+}
+
+// Increase the timeout for the entire server
+app.use((req, res, next) => {
+    res.setTimeout(3600 * 1000, () => { // Set timeout to 1 hour (in milliseconds)
+        console.log('Request has timed out.');
+        res.status(408).send('Request Timeout');
+    });
+    next();
+});
 
 app.get('/', (req, res) => {
     res.render('index.ejs');
@@ -38,7 +53,6 @@ app.post('/get-video-info', async (req, res) => {
 
 app.get('/download', async (req, res) => {
     const videoUrl = req.query.url;
-    const quality = req.query.quality || 'lowest';
 
     if (!ytdl.validateURL(videoUrl)) {
         return res.status(400).json({ error: 'Invalid URL' });
@@ -46,15 +60,41 @@ app.get('/download', async (req, res) => {
 
     try {
         const info = await ytdl.getInfo(videoUrl);
-        const title = info.videoDetails.title;
-        const stream = ytdl(videoUrl, { quality: 'highestaudio' });
+        const title = info.videoDetails.title.replace(/[<>:"\/\\|?*]+/g, ''); // Sanitize filename
+        const filePath = path.join(DOWNLOAD_DIR, `${title}.mp4`);
 
-        res.header('Content-Disposition', `attachment; filename="${title}.mp4"`);
-        await stream.pipe(fs.createWriteStream(`${title}.mp4`));
+        const stream = ytdl(videoUrl, { quality: 'lowest' }); // Set default quality to 'lowest'
+
+        // Pipe the video stream to a file and handle errors
+        const fileStream = fs.createWriteStream(filePath);
+        stream.pipe(fileStream);
 
         stream.on('end', () => {
-            res.status(200).send('Video downloaded successfully');
+            res.download(filePath, `${title}.mp4`, (err) => {
+                if (err) {
+                    console.error('Error sending file:', err);
+                    res.status(500).send('Error sending file');
+                }
+                // Optionally delete the file after download
+                fs.unlink(filePath, (unlinkErr) => {
+                    if (unlinkErr) console.error('Error deleting file:', unlinkErr);
+                });
+            });
         });
+
+        stream.on('error', (err) => {
+            console.error('Error during download:', err);
+            res.status(500).send('Error during download');
+        });
+
+        fileStream.on('error', (err) => {
+            console.error('Error writing file:', err);
+            res.status(500).send('Error writing file');
+        });
+
+        // Increase the timeout for this specific request
+        req.setTimeout(3600 * 1000); // Set timeout to 1 hour (in milliseconds)
+
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Failed to download video' });
