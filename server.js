@@ -2,7 +2,6 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path');
 const ytdl = require('ytdl-core');
-const serverless = require('serverless-http');
 const app = express();
 const PORT = process.env.PORT || 1000;
 
@@ -11,18 +10,10 @@ app.use(express.json());
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
 
-app.get('/.netlify/functions/yt-mp4-converter/download', async (req, res) => {
-    const url = req.query.url;
-    if (!ytdl.validateURL(url)) {
-      return res.status(400).send('Invalid URL');
-    }
-    res.header('Content-Disposition', 'attachment; filename="video.mp4"');
-    ytdl(url).pipe(res);
-  });
-  
-// app.get('/', (req, res) => {
-//     res.render('index.ejs');
-// });
+
+app.get('/', (req, res) => {
+    res.render('index.ejs');
+});
 
 app.post('/get-video-info', async (req, res) => {
     const videoUrl = req.body.url;
@@ -67,5 +58,3 @@ app.get('/download', async (req, res) => {
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
-
-module.exports.handler = serverless(app);
