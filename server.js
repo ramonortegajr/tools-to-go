@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path');
 const ytdl = require('ytdl-core');
-
+const serverless = require('serverless-http');
 const app = express();
 const PORT = process.env.PORT || 1000;
 
@@ -58,3 +58,5 @@ app.get('/download', async (req, res) => {
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
+
+module.exports.handler = serverless(app);
