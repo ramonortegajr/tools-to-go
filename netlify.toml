@@ -1,7 +1,11 @@
 [build]
-  functions = "functions"
+  command = "npm install && npm run build"
+  publish = "public"
 
 [[redirects]]
   from = "/*"
-  to = "/.netlify/functions/index"
+  to = "/index.ejs"
   status = 200
+
+[functions]
+  directory = "functions"
