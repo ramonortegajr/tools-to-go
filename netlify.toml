@@ -1,0 +1,3 @@
+[build]
+  publish = "build"  # or "dist" if using Webpack
+  command = "npm run build"
