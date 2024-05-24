@@ -1,0 +1,8 @@
+[build]
+  command = "npm start"
+  publish = "public" # or the directory where your static files are
+
+[[redirects]]
+  from = "/*"
+  to = "/index.ejs"
+  status = 200
