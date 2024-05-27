@@ -18,8 +18,33 @@ document.getElementById('converter-form').addEventListener('submit', async funct
         if (response.ok) {
             document.getElementById('thumbnail').src = data.thumbnail;
             document.getElementById('title').innerText = `Title: ${data.title}`;
-            document.getElementById('length').innerText = `Length: ${data.length} seconds`;
+            document.getElementById('length').innerText = `Length: ${formatDuration(data.length)}`;
             document.getElementById('video-info').style.display = 'block';
+
+            // Fetch available formats
+            const formatsResponse = await fetch('/get-video-formats', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ url: videoUrl })
+            });
+            const formatsData = await formatsResponse.json();
+
+            if (formatsResponse.ok) {
+                const qualitySelect = document.getElementById('quality');
+                qualitySelect.innerHTML = ''; // Clear previous options
+                
+                formatsData.formats.forEach(format => {
+                    const option = document.createElement('option');
+                    option.value = format.itag;
+                    option.textContent = `${format.quality} - ${format.container}`;
+                    option.dataset.quality = format.quality; // Store quality for later use
+                    qualitySelect.appendChild(option);
+                });
+            } else {
+                alert(formatsData.error);
+            }
         } else {
             alert(data.error);
         }
@@ -30,12 +55,13 @@ document.getElementById('converter-form').addEventListener('submit', async funct
     }
 });
 
-document.getElementById('download-button').addEventListener('click', async function () {
+document.getElementById('download-button').addEventListener('click', function () {
     const videoUrl = document.getElementById('video-url').value;
-    const quality = document.getElementById('quality').value;
-    
-    const downloadUrl = `/download?url=${encodeURIComponent(videoUrl)}&quality=${quality}`;
-    
+    const qualitySelect = document.getElementById('quality');
+    const itag = qualitySelect.value;
+    const quality = qualitySelect.options[qualitySelect.selectedIndex].dataset.quality;
+    const downloadUrl = `/download?url=${encodeURIComponent(videoUrl)}&itag=${itag}&quality=${quality}`;
+
     const a = document.createElement('a');
     a.href = downloadUrl;
     a.download = 'video.mp4';
@@ -44,54 +70,24 @@ document.getElementById('download-button').addEventListener('click', async funct
     document.body.removeChild(a);
 });
 
-
 document.addEventListener('DOMContentLoaded', function () {
-    const downloadButton = document.getElementById('download-button');
-    const startDownloadButton = document.getElementById('start-download');
-    const statusMessage = document.getElementById('status-message');
-
-    pasteClipboardButton.addEventListener('click', function () {
-        navigator.clipboard.readText()
-            .then(text => {
-                document.getElementById('video-url').value = text;
-            })
-            .catch(err => {
-                console.error('Failed to read clipboard contents: ', err);
-            });
-    });
-
-    downloadButton.addEventListener('click', function () {
-        const videoUrl = document.getElementById('video-url').value;
-        const quality = document.getElementById('quality').value;
-
-        startDownloadButton.style.display = 'inline-block';
-        statusMessage.style.display = 'block';
-
-        fetch(`/download?url=${encodeURIComponent(videoUrl)}&quality=${quality}`)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Failed to download video');
-                }
-                return response.text();
-            })
-            .then(title => {
-                statusMessage.textContent = 'Video downloaded successfully';
-                startDownloadButton.style.display = 'none';
-                const downloadUrl = `/download?url=${encodeURIComponent(videoUrl)}&quality=${quality}`;
-                
-                // Create an <a> element to trigger the download
-                const a = document.createElement('a');
-                a.href = downloadUrl;
-                a.download = `${title}.mp4`; // Set the filename to the video title
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-            })
-            .catch(error => {
-                console.error(error);
-                statusMessage.textContent = 'Failed to download video';
-                startDownloadButton.style.display = 'none';
-            });
-    });
+    const pasteClipboardButton = document.getElementById('paste-clipboard');
+    if (pasteClipboardButton) {
+        pasteClipboardButton.addEventListener('click', function () {
+            navigator.clipboard.readText()
+                .then(text => {
+                    document.getElementById('video-url').value = text;
+                })
+                .catch(err => {
+                    console.error('Failed to read clipboard contents: ', err);
+                });
+        });
+    }
 });
 
+function formatDuration(seconds) {
+    const hrs = Math.floor(seconds / 3600);
+    const mins = Math.floor((seconds % 3600) / 60);
+    const secs = seconds % 60;
+    return `${hrs > 0 ? `${hrs} hour${hrs > 1 ? 's' : ''}, ` : ''}${mins > 0 ? `${mins} minute${mins > 1 ? 's' : ''}, ` : ''}${secs} second${secs > 1 ? 's' : ''}`;
+}
