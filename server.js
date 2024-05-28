@@ -18,7 +18,6 @@ app.post('/get-video-info', async (req, res) => {
     if (!ytdl.validateURL(videoUrl)) {
         return res.status(400).json({ error: 'Invalid URL' });
     }
-
     try {
         const info = await ytdl.getInfo(videoUrl);
         const videoDetails = {
