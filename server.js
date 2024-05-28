@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const ytdl = require('ytdl-core');
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 2000;
 
 app.use(cors());
 app.use(express.json());
@@ -32,6 +32,7 @@ app.post('/get-video-info', async (req, res) => {
     }
 });
 
+
 app.post('/get-video-formats', async (req, res) => {
     const videoUrl = req.body.url;
     if (!ytdl.validateURL(videoUrl)) {
@@ -41,12 +42,35 @@ app.post('/get-video-formats', async (req, res) => {
     try {
         const info = await ytdl.getInfo(videoUrl);
         const formats = info.formats
-            .filter(format => format.container === 'mp4' && format.qualityLabel) // Filter out non-mp4 formats and those without a quality label
+            .filter(format => {
+                return (
+                    (format.itag === 18 && format.container === 'mp4' && format.qualityLabel === '360p' &&
+                        format.codecs.includes('avc1.42001E') && format.audioBitrate === 96) ||
+                    (format.itag === 248 && format.container === 'webm' && format.qualityLabel === '1080p' &&
+                        format.codecs.includes('vp9')) ||
+                    (format.itag === 136 && format.container === 'mp4' && format.qualityLabel === '720p' &&
+                        format.codecs.includes('avc1.4d4016')) ||
+                    (format.itag === 247 && format.container === 'webm' && format.qualityLabel === '720p' &&
+                        format.codecs.includes('vp9')) ||
+                    (format.itag === 135 && format.container === 'mp4' && format.qualityLabel === '480p' &&
+                        format.codecs.includes('avc1.4d4014'))
+                    // (format.itag === 140 && format.container === 'mp4' && format.audioBitrate === 128)
+                    // (format.itag === 137 && format.container === 'mp4' && format.qualityLabel === '1080p' &&
+                    //     format.codecs.includes('avc1.640028')) ||
+                    // (format.itag === 134 && format.container === 'mp4' && format.qualityLabel === '360p' &&
+                    //     format.codecs.includes('avc1.4d401e')) ||
+                    
+                );
+            })
             .map(format => ({
                 quality: format.qualityLabel,
                 itag: format.itag,
-                container: format.container
+                container: format.container,
+                codecs: format.codecs,
+                bitrate: format.bitrate,
+                audioBitrate: format.audioBitrate
             }));
+        console.log('Filtered formats:', formats); // Log the formats to check the output
         res.json({ formats });
     } catch (error) {
         console.error(error);
@@ -66,10 +90,13 @@ app.get('/download', (req, res) => {
     try {
         ytdl.getInfo(videoUrl).then(info => {
             const format = ytdl.chooseFormat(info.formats, { quality: itag });
-            const title = info.videoDetails.title.replace(/[<>:"\/\\|?*]+/g, ''); // Sanitize filename
+            if (!format) {
+                return res.status(400).json({ error: 'Unsupported format' });
+            }
+
+            const title = info.videoDetails.title.replace(/[<>:"\/\\|?*]+/g, '');
             res.header('Content-Disposition', `attachment; filename="${title} (${quality}).${format.container}"`);
-            
-            // Stream the video in the selected format
+
             ytdl(videoUrl, { format }).pipe(res);
         });
     } catch (error) {
@@ -77,6 +104,7 @@ app.get('/download', (req, res) => {
         res.status(500).json({ error: 'Failed to download video' });
     }
 });
+
 
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);

@@ -42,6 +42,9 @@ document.getElementById('converter-form').addEventListener('submit', async funct
                     option.dataset.quality = format.quality; // Store quality for later use
                     qualitySelect.appendChild(option);
                 });
+
+                // Enable the download button once the quality options are loaded
+                document.getElementById('download-button').disabled = false;
             } else {
                 alert(formatsData.error);
             }
@@ -54,6 +57,10 @@ document.getElementById('converter-form').addEventListener('submit', async funct
         cogIcon.classList.remove('spin-animation');
     }
 });
+
+// Initially disable the download button
+document.getElementById('download-button').disabled = true;
+
 document.getElementById('download-button').addEventListener('click', function () {
     const videoUrl = document.getElementById('video-url').value;
     const qualitySelect = document.getElementById('quality');
