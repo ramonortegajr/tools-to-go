@@ -201,9 +201,18 @@ i {
     margin-right: 8px; /* Space between icon and text */
 }
 
+.header-text {
+    font-size: 3em; /* Adjust the font size as needed */
+    color: #333; /* Base color of the text */
+    text-shadow: 
+        1px 1px 0 #ccc,
+        2px 2px 0 #bbb, 
+        3px 3px 0 #aaa,
+}
+
 /* Adjustments for mobile devices */
 @media only screen and (max-width: 768px) {
-    header h1 {
+    .header-text {
         font-size: 2.0em; /* Reduce font size for smaller screens */
         text-align: center; /* Center align the title */
     }

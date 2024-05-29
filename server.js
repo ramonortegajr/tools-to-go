@@ -4,19 +4,19 @@ const ytdl = require('ytdl-core');
 const app = express();
 const path = require("path");
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 2000;
 
 app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 app.set('view engine', 'ejs');
 
+//call end points
 app.get('/', (req, res) => {
     res.render('index.ejs');
 });
-
-app.get('/home', (req, res) => {
-    res.render('home');
+app.get('/tube-togo', (req, res) => {
+    res.render('tube-togo');
 });
 
 app.post('/get-video-info', async (req, res) => {

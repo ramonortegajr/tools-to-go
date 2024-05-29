@@ -1,52 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link rel="stylesheet" href="./css/style.css">
-    <title>Tube To Go</title>
-</head>
-<body>
-    <nav class="navbar">
-        <div class="navbar-left">
-            <button class="menu-icon">&#9776;</button>
-        </div>
-        <div class="navbar-right">
-            <i class="fa fa-question-circle" aria-hidden="true"></i>
-        </div>
-    </nav>
-    <header>
-        <h1>Tube To GO!</h1>
-        <p style="font-size: 80%;">Dahil sa Tube To Go, YouTube Mo, Madaling Kopyahin!</p>
-    </header>
-    <div class="converter-box">
-        <form id="converter-form">
-            <div class="input-container" id="input-container">
-                <textarea id="video-url" placeholder="Paste youtube link here" required></textarea>
-                <button id="generate-button" type="submit" style="background-color: #3e5c7b; color: white;">
-                    <i id="cog-icon" class="fas fa-cog"></i> Generate Link
-                </button>
+<%- include('partials/header', { title: 'To Go Services' }) %>
+
+<div class="container">
+    <% const services = [
+        { title: "Tube To Go", description: "Tube To Go is the ultimate solution for converting YouTube videos to MP4 format.", img: "yt.png", colorClass: "red", textColor: "#C13E3E" },
+        { title: "Tik To Go", description: "Tik To Go is the ultimate solution for converting TikTok videos to MP4 format.", img: "tk.png", colorClass: "black", textColor: "#292424" },
+        { title: "MP3 To Go", description: "MP3 To Go is the ultimate solution for converting Audio files to MP3 format.", img: "mp3.png", colorClass: "green", textColor: "#1DB954" },
+        { title: "Face To Go", description: "Face To Go is the ultimate solution for converting Facebook videos to MP4 format.", img: "fb.png", colorClass: "blue", textColor: "#4267B2" }
+    ]; %>
+
+    <% services.forEach(service => { %>
+        <div class="card">
+            <div class="text-section">
+                <h1 style="color: <%= service.textColor %>;"><%= service.title.replace(" ", " ") %></h1>
+                <% if (service.title === 'Tik To Go' || service.title === 'Face To Go' || service.title === 'MP3 To Go') { %>
+                    <button class="more-button <%= service.colorClass %>" style="background-color: gray; color: white;">Soon</button>
+                <% } else { %>
+                    <button class="more-button <%= service.colorClass %>" onclick="convert('<%= service.title %>')">Convert</button>
+                <% } %>
+                <p><%= service.description %></p>
             </div>
-        </form>
-        <div id="video-info" style="display: none; text-align: center; max-width: 400px; margin: auto; border: 1px solid #ccc; border-radius: 10px; padding: 20px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
-            <div id="thumbnail-container">
-                <img id="thumbnail" src="" alt="Video Thumbnail" style="width: 100%; border-radius: 10px; cursor: pointer;">
+            <div class="image-section <%= service.colorClass %>">
+                <img src="/images/<%= service.img %>" alt="<%= service.title %>">
             </div>
-            <p id="title" style="font-weight: bold; font-size: 18px; margin: 10px 0;"></p>
-            <p id="length" style="color: #666; margin-bottom: 20px;"></p>
-            <label for="quality" style="display: block; margin-bottom: 10px; font-weight: bold;">Select Quality:</label>
-            <select id="quality" style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc; margin-bottom: 20px;"></select>
-            <button id="download-button" style="background-color: #3e5c7b; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">
-                <i class="fa fa-download" aria-hidden="true"></i> Download
-            </button>
-        </div>                      
-        <p class="note">💡Generate for free. No signup needed</p>
-    </div>
-    <footer>
-        <button class="explore-tools">More tools soon</button>
-    </footer>
-    <p style="font-size: 80%;">Developed with <span class="blue-heart">&#x1F499;</span> by Ram Ortega</p>
-    <script src="./js/script.js"></script>
-</body>
-</html>
+        </div>
+    <% }); %>
+    
+</div>
+<%- include('partials/footer') %>
+<script src="/js/script.js"></script>

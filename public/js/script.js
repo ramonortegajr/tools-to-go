@@ -147,3 +147,9 @@ function formatDuration(seconds) {
     const secs = seconds % 60;
     return `${hrs > 0 ? `${hrs} hour${hrs > 1 ? 's' : ''}, ` : ''}${mins > 0 ? `${mins} minute${mins > 1 ? 's' : ''}, ` : ''}${secs} second${secs > 1 ? 's' : ''}`;
 }
+
+function convert(serviceName) {
+    // Call your endpoint here
+    window.location.href = '/tube-togo';
+    console.log('Converting:', serviceName);
+}
