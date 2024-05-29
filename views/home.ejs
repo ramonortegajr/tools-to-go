@@ -2,36 +2,18 @@
 
 <div class="container">
     <% const services = [
-        { title: "Tube To Go", description: "Dahil sa Tube To Go, YouTube Mo, Madaling Kopyahin!", img: "yt.png", colorClass: "purple", textColor: "#3a3a8b" },
-        { title: "Tik To Go", description: "Dahil sa Tik To Go, TikTok Mo, Madaling Kopyahin!", img: "tiktok.png", colorClass: "teal", textColor: "#5cbdb9" },
-        { title: "Sound To Go", description: "Dahil sa Sound To Go, Sound Mo, Madaling Kopyahin!", img: "mp3.png", colorClass: "red", textColor: "#e56b6f" },
-        { title: "Book To Go", description: "Dahil sa Book To Go, Book Mo, Madaling Kopyahin!", img: "fb.png", colorClass: "orange", textColor: "#fba65b" }
+        { title: "Tube To Go", description: "Tube To Go is the ultimate solution for converting YouTube videos to MP4 format.", img: "yt.png", colorClass: "red", textColor: "#C13E3E" },
+        { title: "Tik To Go", description: "Tik To Go is the ultimate solution for converting TikTok videos to MP4 format.", img: "tk.png", colorClass: "black", textColor: "#292424" },
+        { title: "MP3 To Go", description: "MP3 To Go is the ultimate solution for converting Audio files to MP3 format.", img: "mp3.png", colorClass: "green", textColor: "#1DB954" },
+        { title: "Face To Go", description: "Face To Go is the ultimate solution for converting Facebook videos to MP4 format.", img: "fb.png", colorClass: "blue", textColor: "#4267B2" }
     ]; %>
-
-    <!-- <% services.forEach(service => { %>
-        <div class="card">
-            <div class="text-section">
-                <h1 style="color: <%= service.textColor %>;"><%= service.title.replace(" ", " ") %></h1>
-                <% if (service.title === 'Tik To Go' || service.title === 'Book To Go' || service.title === 'Sound To Go') { %>
-                    <button class="more-button <%= service.colorClass %>">On Development</button>
-                <% } else { %>
-                    <button class="more-button <%= service.colorClass %>">Convert</button>
-                <% } %>
-                <p><%= service.description %></p>
-            </div>
-            <div class="image-section">
-                <img src="/images/<%= service.img %>" alt="<%= service.title %>">
-            </div>
-        </div>
-    <% }); %> -->
 
     <% services.forEach(service => { %>
         <div class="card">
             <div class="text-section">
                 <h1 style="color: <%= service.textColor %>;"><%= service.title.replace(" ", " ") %></h1>
-                <!-- <button class="more-button <%= service.colorClass %>">Start Convert</button> -->
-                <% if (service.title === 'Tik To Go' || service.title === 'Book To Go' || service.title === 'Sound To Go') { %>
-                    <button class="more-button <%= service.colorClass %>">On Development</button>
+                <% if (service.title === 'Tik To Go' || service.title === 'Face To Go' || service.title === 'MP3 To Go') { %>
+                    <button class="more-button <%= service.colorClass %>">Soon</button>
                 <% } else { %>
                     <button class="more-button <%= service.colorClass %>">Convert</button>
                 <% } %>
