@@ -1,0 +1,47 @@
+<%- include('partials/header', { title: 'To Go Services' }) %>
+
+<div class="container">
+    <% const services = [
+        { title: "Tube To Go", description: "Dahil sa Tube To Go, YouTube Mo, Madaling Kopyahin!", img: "yt.png", colorClass: "purple", textColor: "#3a3a8b" },
+        { title: "Tik To Go", description: "Dahil sa Tik To Go, TikTok Mo, Madaling Kopyahin!", img: "tiktok.png", colorClass: "teal", textColor: "#5cbdb9" },
+        { title: "Sound To Go", description: "Dahil sa Sound To Go, Sound Mo, Madaling Kopyahin!", img: "mp3.png", colorClass: "red", textColor: "#e56b6f" },
+        { title: "Book To Go", description: "Dahil sa Book To Go, Book Mo, Madaling Kopyahin!", img: "fb.png", colorClass: "orange", textColor: "#fba65b" }
+    ]; %>
+
+    <!-- <% services.forEach(service => { %>
+        <div class="card">
+            <div class="text-section">
+                <h1 style="color: <%= service.textColor %>;"><%= service.title.replace(" ", " ") %></h1>
+                <% if (service.title === 'Tik To Go' || service.title === 'Book To Go' || service.title === 'Sound To Go') { %>
+                    <button class="more-button <%= service.colorClass %>">On Development</button>
+                <% } else { %>
+                    <button class="more-button <%= service.colorClass %>">Convert</button>
+                <% } %>
+                <p><%= service.description %></p>
+            </div>
+            <div class="image-section">
+                <img src="/images/<%= service.img %>" alt="<%= service.title %>">
+            </div>
+        </div>
+    <% }); %> -->
+
+    <% services.forEach(service => { %>
+        <div class="card">
+            <div class="text-section">
+                <h1 style="color: <%= service.textColor %>;"><%= service.title.replace(" ", " ") %></h1>
+                <!-- <button class="more-button <%= service.colorClass %>">Start Convert</button> -->
+                <% if (service.title === 'Tik To Go' || service.title === 'Book To Go' || service.title === 'Sound To Go') { %>
+                    <button class="more-button <%= service.colorClass %>">On Development</button>
+                <% } else { %>
+                    <button class="more-button <%= service.colorClass %>">Convert</button>
+                <% } %>
+                <p><%= service.description %></p>
+            </div>
+            <div class="image-section <%= service.colorClass %>">
+                <img src="/images/<%= service.img %>" alt="<%= service.title %>">
+            </div>
+        </div>
+    <% }); %>
+    
+</div>
+<%- include('partials/footer') %>
