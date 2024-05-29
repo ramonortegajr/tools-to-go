@@ -5,6 +5,6 @@
 
 # Demo Link
 https://toolsgo.glitch.me/
-# Developer
-- Ram Ortega
-- ramonortegajr1997@gmail.com
+# Contact Developer
+- Ram Ortega | ramonortegajr1997@gmail.com
+# 🚀 HAPPY CODING 🚀
