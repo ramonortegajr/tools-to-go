@@ -190,15 +190,13 @@ i {
     margin-right: 1.5em;
 }
 
+.support-me i {
+    margin-right: 5px;
+}
+
 .support-me:hover {
     background-color: #06072c; /* Darker yellow on hover */
     color: #ffffff;
-}
-
-.gcash-icon {
-    width: 24px; /* Adjust the size of the icon */
-    height: 24px; /* Adjust the size of the icon */
-    margin-right: 8px; /* Space between icon and text */
 }
 
 .header-text {
