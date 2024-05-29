@@ -8,6 +8,7 @@ body {
     background-color: #f0f0f0;
     flex-wrap: wrap;
     margin-bottom: 80px;
+    margin-top: 80px;
 }
 
 footer {
@@ -16,7 +17,7 @@ footer {
     width: 100%; 
     background-color: #ffffff; 
     color: #343434; 
-    padding: 5px; 
+    padding: 1px; 
     text-align: center;
     font-family: Arial, sans-serif; 
     font-size: larger;
@@ -30,6 +31,27 @@ footer {
     position: absolute; 
     bottom: -5px; 
     transform: translateY(50%); 
+}
+
+header {
+    position: fixed; 
+    top: 0;
+    width: 100%;
+    background-color: #ffffff; 
+    color: #000000; 
+    display: flex; 
+    align-items: center;
+    padding: 8px; 
+    font-family: Arial, sans-serif; 
+}
+
+.menu-icon {
+    margin-right: 20px; 
+    cursor: pointer;
+}
+
+h1 {
+    margin: 0;
 }
 
 .container {
@@ -138,4 +160,27 @@ footer {
 
 .more-button.Book {
     background-color: #4267B2; /* Blue color like Facebook */
+}
+
+/* Adjustments for mobile devices */
+@media only screen and (max-width: 768px) {
+    .container {
+        width: 100%; 
+        padding: 10px; 
+    }
+
+    .card {
+        width: 100%; 
+        margin-bottom: 10px; 
+    }
+
+    .text-section,
+    .image-section {
+        width: 100%;
+        padding: 10px; 
+    }
+
+    .text-section h1 {
+        font-size: 1.5em; 
+    }
 }
