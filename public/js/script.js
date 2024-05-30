@@ -110,37 +110,6 @@ document.getElementById('thumbnail-container').addEventListener('click', functio
     }
 });
 
-
-// document.getElementById('download-button').addEventListener('click', function () {
-//     const videoUrl = document.getElementById('video-url').value;
-//     const qualitySelect = document.getElementById('quality');
-//     const itag = qualitySelect.value;
-//     const quality = qualitySelect.options[qualitySelect.selectedIndex].dataset.quality;
-//     const downloadUrl = `/download?url=${encodeURIComponent(videoUrl)}&itag=${itag}&quality=${quality}`;
-
-//     const a = document.createElement('a');
-//     a.href = downloadUrl;
-//     a.download = 'video.mp4';
-//     document.body.appendChild(a);
-//     a.click();
-//     document.body.removeChild(a);
-// });
-
-// document.addEventListener('DOMContentLoaded', function () {
-//     const pasteClipboardButton = document.getElementById('paste-clipboard');
-//     if (pasteClipboardButton) {
-//         pasteClipboardButton.addEventListener('click', function () {
-//             navigator.clipboard.readText()
-//                 .then(text => {
-//                     document.getElementById('video-url').value = text;
-//                 })
-//                 .catch(err => {
-//                     console.error('Failed to read clipboard contents: ', err);
-//                 });
-//         });
-//     }
-// });
-
 function formatDuration(seconds) {
     const hrs = Math.floor(seconds / 3600);
     const mins = Math.floor((seconds % 3600) / 60);
@@ -150,6 +119,6 @@ function formatDuration(seconds) {
 
 function convert(serviceName) {
     // Call your endpoint here
-    window.location.href = '/tube-togo';
+    window.location.href = '/tubetogo';
     console.log('Converting:', serviceName);
 }

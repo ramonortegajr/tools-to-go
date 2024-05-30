@@ -1,0 +1,36 @@
+<%- include('partials/header', { title: 'Tools To Go' }) %>
+
+<div class="container" style="display: flex; flex-direction: column; align-items: center;">
+    <!-- Tube To Go -->
+    <div class="text-section" style="display: flex; align-items: center; justify-content: center; flex-direction: column; text-align: center; background: none;">
+        <h1 style="color: #C13E3E; margin: 0; font-size: 2.5em; margin-bottom: -20px;">Tube To Go</h1>
+    </div>
+    <div class="card" style="border: 2px solid #C13E3E; padding: 40px; width: 80%; display: flex; justify-content: space-between; align-items: flex-start;">
+        <form id="converter-form">
+            <div style="width: 100%; margin-right: 20px;">
+                <h2 style="color: #C13E3E; margin-bottom: 20px;">Paste YouTube link here:</h2>
+                <input type="text" id="video-url" placeholder="ex:https://www.youtube.com/watch?qwerty" style="width: 93%; padding: 15px; margin-bottom: 20px; border: 1px solid #C13E3E; border-radius: 5px; background: none;" required>
+                <button class="more-button red" id="generate-button" type="submit" style="background-color: #C13E3E; color: white; padding: 15px; border: none; border-radius: 5px; font-size: 1.2em; width: 100%;">
+                    <i id="cog-icon" class="fas fa-cog" style="color: white;"></i> Generate Link
+                </button>
+            </div>
+        </form>  
+        
+        <div id="video-info" style="display: none; text-align: center; max-width: 300px; margin: auto; margin-left: 2.0em; border: 2px solid #C13E3E; border-radius: 10px; padding: 20px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+            <div id="thumbnail-container">
+                <img id="thumbnail" src="" alt="Video Thumbnail" style="width: 100%; border-radius: 10px; cursor: pointer;">
+            </div>
+            <p id="title" style="font-weight: bold; font-size: 18px; margin: 10px 0;"></p>
+            <p id="length" style="color: #666; margin-bottom: 20px;"></p>
+            <label for="quality" style="display: block; margin-bottom: 10px; font-weight: bold;">Select Quality:</label>
+            <select id="quality" style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #C13E3E; margin-bottom: 20px;"></select>
+            <button id="download-button" style="background-color: #C13E3E; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">
+                <i class="fa fa-download" aria-hidden="true" style="color: white;"></i> Download
+            </button>
+        </div>
+    </div>
+    <p class="note" style="margin-top: -20px;">💡Generate for free. No signup needed</p>
+</div>
+
+<%- include('partials/footer') %>
+<script src="./js/script.js"></script>

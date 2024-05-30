@@ -13,11 +13,14 @@ app.set('view engine', 'ejs');
 
 //call end points
 app.get('/', (req, res) => {
-    res.render('index.ejs');
+    res.render('index');
 });
 app.get('/tube-togo', (req, res) => {
     res.render('tube-togo');
 });
+app.get('/tubetogo', (req, res) => {
+    res.render('tubetogo');
+})
 
 app.post('/get-video-info', async (req, res) => {
     const videoUrl = req.body.url;

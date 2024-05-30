@@ -51,6 +51,10 @@ header {
     margin-right: 30px; 
 }
 
+.header-link {
+    text-decoration: none;
+}
+
 .icon {
     margin-right: 10px;  
   }
@@ -236,4 +240,11 @@ i {
     .text-section h1 {
         font-size: 1.5em; 
     }
+}
+.spin-animation {
+    animation: spin 1s linear infinite;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
