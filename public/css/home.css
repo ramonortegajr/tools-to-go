@@ -227,15 +227,15 @@ i {
     .support-me {
         display: none; /* Hide "Buy Me a Coffee" on smaller screens */
     }
-
+  
     .card {
         width: 100%; 
         margin-bottom: 10px; 
         padding: 20px; /* Adjust padding */
     }
 
-    .text-section h1 {
-        font-size: 1.0em; 
+    #text-header-title {
+       size: small;
     }
 
     input[type="text"],
