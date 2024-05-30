@@ -4,7 +4,7 @@ const ytdl = require('ytdl-core');
 const app = express();
 const path = require("path");
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 2000;
 
 app.use(cors());
 app.use(express.json());
@@ -39,6 +39,50 @@ app.post('/get-video-info', async (req, res) => {
 });
 
 
+// app.post('/get-video-formats', async (req, res) => {
+//     const videoUrl = req.body.url;
+//     if (!ytdl.validateURL(videoUrl)) {
+//         return res.status(400).json({ error: 'Invalid URL' });
+//     }
+
+//     try {
+//         const info = await ytdl.getInfo(videoUrl);
+//         const formats = info.formats
+//             .filter(format => {
+//                 return (
+//                     (format.itag === 18 && format.container === 'mp4' && format.qualityLabel === '360p' &&
+//                         format.codecs.includes('avc1.42001E') && format.audioBitrate === 96) ||
+//                     (format.itag === 137 && format.container === 'mp4' && format.qualityLabel === '1080p' &&
+//                         format.codecs.includes('avc1.640028')) ||
+//                     (format.itag === 248 && format.container === 'webm' && format.qualityLabel === '1080p' &&
+//                         format.codecs.includes('vp9')) ||
+//                     (format.itag === 136 && format.container === 'mp4' && format.qualityLabel === '720p' &&
+//                         format.codecs.includes('avc1.4d4016')) ||
+//                     (format.itag === 247 && format.container === 'webm' && format.qualityLabel === '720p' &&
+//                         format.codecs.includes('vp9')) ||
+//                     (format.itag === 135 && format.container === 'mp4' && format.qualityLabel === '480p' &&
+//                         format.codecs.includes('avc1.4d4014')) ||
+//                     (format.itag === 134 && format.container === 'mp4' && format.qualityLabel === '360p' &&
+//                         format.codecs.includes('avc1.4d401e')) ||
+//                     (format.itag === 140 && format.container === 'mp4' && format.audioBitrate === 128)
+//                 );
+//             })
+//             .map(format => ({
+//                 quality: format.qualityLabel,
+//                 itag: format.itag,
+//                 container: format.container,
+//                 codecs: format.codecs,
+//                 bitrate: format.bitrate,
+//                 audioBitrate: format.audioBitrate
+//             }));
+//         console.log('Filtered formats:', formats); // Log the formats to check the output
+//         res.json({ formats });
+//     } catch (error) {
+//         console.error(error);
+//         res.status(500).json({ error: 'Failed to fetch video formats' });
+//     }
+// });
+
 app.post('/get-video-formats', async (req, res) => {
     const videoUrl = req.body.url;
     if (!ytdl.validateURL(videoUrl)) {
@@ -46,27 +90,12 @@ app.post('/get-video-formats', async (req, res) => {
     }
 
     try {
+        const supportedQualities = ['360p', '1080p', '720p', '480p']; // Define supported qualities
         const info = await ytdl.getInfo(videoUrl);
         const formats = info.formats
             .filter(format => {
-                return (
-                    (format.itag === 18 && format.container === 'mp4' && format.qualityLabel === '360p' &&
-                        format.codecs.includes('avc1.42001E') && format.audioBitrate === 96) ||
-                    (format.itag === 248 && format.container === 'webm' && format.qualityLabel === '1080p' &&
-                        format.codecs.includes('vp9')) ||
-                    (format.itag === 136 && format.container === 'mp4' && format.qualityLabel === '720p' &&
-                        format.codecs.includes('avc1.4d4016')) ||
-                    (format.itag === 247 && format.container === 'webm' && format.qualityLabel === '720p' &&
-                        format.codecs.includes('vp9')) ||
-                    (format.itag === 135 && format.container === 'mp4' && format.qualityLabel === '480p' &&
-                        format.codecs.includes('avc1.4d4014'))
-                    // (format.itag === 140 && format.container === 'mp4' && format.audioBitrate === 128)
-                    // (format.itag === 137 && format.container === 'mp4' && format.qualityLabel === '1080p' &&
-                    //     format.codecs.includes('avc1.640028')) ||
-                    // (format.itag === 134 && format.container === 'mp4' && format.qualityLabel === '360p' &&
-                    //     format.codecs.includes('avc1.4d401e')) ||
-                    
-                );
+                // Check if format quality is in the supported qualities array
+                return supportedQualities.includes(format.qualityLabel);
             })
             .map(format => ({
                 quality: format.qualityLabel,

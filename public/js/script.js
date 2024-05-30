@@ -1,3 +1,63 @@
+// document.getElementById('converter-form').addEventListener('submit', async function (e) {
+//     e.preventDefault();
+
+//     const videoUrl = document.getElementById('video-url').value;
+//     const cogIcon = document.getElementById('cog-icon');
+//     cogIcon.classList.add('spin-animation');
+
+//     try {
+//         const response = await fetch('/get-video-info', {
+//             method: 'POST',
+//             headers: {
+//                 'Content-Type': 'application/json'
+//             },
+//             body: JSON.stringify({ url: videoUrl })
+//         });
+//         const data = await response.json();
+
+//         if (response.ok) {
+//             document.getElementById('thumbnail').src = data.thumbnail;
+//             document.getElementById('title').innerText = `Title: ${data.title}`;
+//             document.getElementById('length').innerText = `Length: ${formatDuration(data.length)}`;
+//             document.getElementById('video-info').style.display = 'block';
+
+//             // Fetch available formats
+//             const formatsResponse = await fetch('/get-video-formats', {
+//                 method: 'POST',
+//                 headers: {
+//                     'Content-Type': 'application/json'
+//                 },
+//                 body: JSON.stringify({ url: videoUrl })
+//             });
+//             const formatsData = await formatsResponse.json();
+
+//             if (formatsResponse.ok) {
+//                 const qualitySelect = document.getElementById('quality');
+//                 qualitySelect.innerHTML = ''; // Clear previous options
+                
+//                 formatsData.formats.forEach(format => {
+//                     const option = document.createElement('option');
+//                     option.value = format.itag;
+//                     option.textContent = `${format.quality} - ${format.container}`;
+//                     option.dataset.quality = format.quality; // Store quality for later use
+//                     qualitySelect.appendChild(option);
+//                 });
+
+//                 // Enable the download button once the quality options are loaded
+//                 document.getElementById('download-button').disabled = false;
+//             } else {
+//                 alert(formatsData.error);
+//             }
+//         } else {
+//             alert(data.error);
+//         }
+//     } catch (error) {
+//         alert('An error occurred while fetching video info');
+//     } finally {
+//         cogIcon.classList.remove('spin-animation');
+//     }
+// });
+
 document.getElementById('converter-form').addEventListener('submit', async function (e) {
     e.preventDefault();
 
