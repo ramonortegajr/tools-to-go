@@ -77,7 +77,8 @@ document.getElementById('converter-form').addEventListener('submit', async funct
 
         if (response.ok) {
             document.getElementById('thumbnail').src = data.thumbnail;
-            document.getElementById('title').innerText = `Title: ${data.title}`;
+            //document.getElementById('title').innerText = `Title: ${data.title}`;
+            document.getElementById('title').innerText = `Title: ${data.title.length > 5 ? data.title.substring(0, 5) + '...' : data.title}`;
             document.getElementById('length').innerText = `Length: ${formatDuration(data.length)}`;
             document.getElementById('video-info').style.display = 'block';
 
@@ -179,10 +180,5 @@ function formatDuration(seconds) {
 
 /* button onclick call endpoints */
 function convert(serviceName) {
-    // Call your endpoint here
     window.location.href = '/tubetogo';
-}
-function tools(serviceName) {
-    // Call your endpoint here
-    window.location.href = '/';
 }
