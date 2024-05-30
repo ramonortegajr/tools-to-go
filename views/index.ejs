@@ -1,6 +1,6 @@
 <%- include('partials/header', { title: 'Tools To Go' }) %>
 
-<div class="container">
+<div class="container-index">
     <% const services = [
         { title: "Tube To Go", description: "Tube To Go is the ultimate solution for converting YouTube videos to MP4 format.", img: "yt.png", colorClass: "red", textColor: "#C13E3E" },
         { title: "Tik To Go", description: "Tik To Go is the ultimate solution for converting TikTok videos to MP4 format.", img: "tk.png", colorClass: "black", textColor: "#292424" },
@@ -10,7 +10,7 @@
     <% services.forEach(service => { %>
         <div class="card">
             <div class="text-section">
-                <h1 style="color: <%= service.textColor %>;"><%= service.title.replace(" ", " ") %></h1>
+                <h1 class="title-small" style="color: <%= service.textColor %>;"><%= service.title.replace(" ", " ") %></h1>
                 <% if (service.title === 'Tik To Go' || service.title === 'Face To Go' || service.title === 'MP3 To Go') { %>
                     <button class="more-button <%= service.colorClass %>" style="background-color: gray; color: white;">Soon</button>
                 <% } else { %>
