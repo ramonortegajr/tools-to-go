@@ -15,9 +15,6 @@ app.set('view engine', 'ejs');
 app.get('/', (req, res) => {
     res.render('index');
 });
-app.get('/tube-togo', (req, res) => {
-    res.render('tube-togo');
-});
 app.get('/tubetogo', (req, res) => {
     res.render('tubetogo');
 })
