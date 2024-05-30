@@ -177,8 +177,12 @@ function formatDuration(seconds) {
     return `${hrs > 0 ? `${hrs} hour${hrs > 1 ? 's' : ''}, ` : ''}${mins > 0 ? `${mins} minute${mins > 1 ? 's' : ''}, ` : ''}${secs} second${secs > 1 ? 's' : ''}`;
 }
 
+/* button onclick call endpoints */
 function convert(serviceName) {
     // Call your endpoint here
     window.location.href = '/tubetogo';
-    console.log('Converting:', serviceName);
+}
+function tools(serviceName) {
+    // Call your endpoint here
+    window.location.href = '/';
 }
