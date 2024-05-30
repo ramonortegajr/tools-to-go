@@ -84,8 +84,8 @@ i {
     flex-wrap: wrap;
     gap: 20px;
     padding: 15px;
-    width: 75%;
-    max-width: 1200px;
+    width: 70%;
+    max-width: 1000px;
 }
 
 .card {
@@ -234,6 +234,12 @@ i {
         margin-right: 0.5em;
     }
 
+    .container {
+        width: 100%; 
+        padding: 10px; 
+        margin-right: 0.5em;
+    }
+    
     .card .text-section .title-small {
         font-size: 1.2em;
     }
@@ -241,11 +247,6 @@ i {
     .card .text-section p {
         font-size: small;
         text-align: justify;
-    }
-    .container {
-        width: 100%; 
-        padding: 10px; 
-        margin-right: 0.5em;
     }
 
     .support-me {
